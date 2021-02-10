@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:46:32 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/10 15:31:13 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/10 16:35:04 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_save(char *str, char *read_sofar, char leftover[]) //첫번째 '\n' 기�
 {
 	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '\n')
@@ -34,7 +35,7 @@ int		ft_save(char *str, char *read_sofar, char leftover[]) //첫번째 '\n' 기�
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*leftover[OPEN_MAX];
+	static char	*leftover[OPEN_MAX + 1];
 	char		*read_sofar;
 	char		*temp;
 	char		buf[BUFFER_SIZE];
@@ -62,7 +63,7 @@ int		get_next_line(int fd, char **line)
 				return (-1);
 			free(leftover[fd]);
 		} //여기까지 이전 read의 leftover에 있는 값을 처리하는 과정
-		while (!fin && (read(fd, buf, BUFFER_SIZE) = BUFFER_SIZE )) // EOF를 만나기 전의 경우 (EOF 읽으면 while문 종료)
+		while (!fin && (read(fd, buf, BUFFER_SIZE) == BUFFER_SIZE )) // EOF를 만나기 전의 경우 (EOF 읽으면 while문 종료)
 		{
 			if (ft_strchr(leftover[fd], '\n'))
 			{

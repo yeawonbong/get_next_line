@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/10 15:29:06 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/10 16:42:56 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *str);

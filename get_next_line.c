@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:46:32 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/10 16:35:04 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/10 16:58:31 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		get_next_line(int fd, char **line)
 
 	fin = 0;
 	while (1)
-	{
+	{printf("OK1\n");
 		if (ft_strchr(leftover[fd], '\n')) // '\n'이 있으면 
 		{
 			temp = ft_strdup(leftover[fd]);
@@ -52,7 +52,7 @@ int		get_next_line(int fd, char **line)
 			*line = read_sofar;
 			return (1);
 		}
-		else // 남은 문자열에 '\n'이 없으면
+		else if (leftover[fd]) // 남은 문자열에 '\n'이 없으면
 		{
 			if (fin) // EOF 있는 라인이라면
 			{
@@ -63,8 +63,9 @@ int		get_next_line(int fd, char **line)
 				return (-1);
 			free(leftover[fd]);
 		} //여기까지 이전 read의 leftover에 있는 값을 처리하는 과정
-		while (!fin && (read(fd, buf, BUFFER_SIZE) == BUFFER_SIZE )) // EOF를 만나기 전의 경우 (EOF 읽으면 while문 종료)
-		{
+	printf("OK2\n");
+		while (!fin && (read(fd, buf, BUFFER_SIZE) == BUFFER_SIZE)) // EOF를 만나기 전의 경우 (EOF 읽으면 while문 종료)
+		{printf("OK2\n");
 			if (ft_strchr(leftover[fd], '\n'))
 			{
 				if (ft_save(buf, read_sofar, leftover[fd]) == -1)

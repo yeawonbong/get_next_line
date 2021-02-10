@@ -6,13 +6,13 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:46:32 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/08 20:36:43 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/10 15:31:13 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_save(char *str, char *read_sofar, char leftover[]) //첫번쩌 '\n' 기준으로 split 하는 함수
+int		ft_save(char *str, char *read_sofar, char leftover[]) //첫번째 '\n' 기준으로 split 하여 저장하는 함수
 {
 	int	i;
 
@@ -20,7 +20,7 @@ int		ft_save(char *str, char *read_sofar, char leftover[]) //첫번쩌 '\n' 기�
 	{
 		if (str[i] == '\n')
 		{
-			if (!(leftover = ft_stdup(str[i + 1])))
+			if (!(leftover = ft_strdup(&str[i + 1])))
 				return (-1);
 			str[i] = '\0';
 			if (!(read_sofar = ft_strjoin(read_sofar, str)))
@@ -43,9 +43,9 @@ int		get_next_line(int fd, char **line)
 	fin = 0;
 	while (1)
 	{
-		if (strchr(leftover[fd], '\n')) // '\n'이 있으면 
+		if (ft_strchr(leftover[fd], '\n')) // '\n'이 있으면 
 		{
-			temp = strdup(leftover[fd]);
+			temp = ft_strdup(leftover[fd]);
 			if (ft_save(temp, read_sofar, leftover[fd]) == -1) //save로 split
 				return (-1);
 			*line = read_sofar;
@@ -58,27 +58,27 @@ int		get_next_line(int fd, char **line)
 				*line = leftover[fd];
 				return (0);
 			}
-			if (!(read_sofar = strdup(leftover[fd])))
+			if (!(read_sofar = ft_strdup(leftover[fd])))
 				return (-1);
 			free(leftover[fd]);
 		} //여기까지 이전 read의 leftover에 있는 값을 처리하는 과정
 		while (!fin && (read(fd, buf, BUFFER_SIZE) = BUFFER_SIZE )) // EOF를 만나기 전의 경우 (EOF 읽으면 while문 종료)
 		{
-			if (strchr(leftover[fd], '\n') == 0)
-			{
-				if (!(read_sofar = strjoin(read_sofar, buf)))
-					return (-1);
-			}
-			else
+			if (ft_strchr(leftover[fd], '\n'))
 			{
 				if (ft_save(buf, read_sofar, leftover[fd]) == -1)
 					return (-1);
 				*line = read_sofar;
 				return (1);
 			}
+			else
+			{
+				if (!(read_sofar = ft_strjoin(read_sofar, buf)))
+					return (-1);
+			}
 		} // EOF 있는 마지막 line을 읽은 상태
 		fin = 1;
-		leftover[fd] = strdup(buf);
+		leftover[fd] = ft_strdup(buf);
 	}
 	return (0);
 }

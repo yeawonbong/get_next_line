@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/08 19:11:08 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/10 15:29:06 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct		s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
+char	*ft_strchr(const char *str, int c);
+char	*ft_strdup(const char *str);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *str);
+int		ft_save(char *str, char *read_sofar, char leftover[]);
+int		get_next_line(int fd, char **line);
 
 #endif

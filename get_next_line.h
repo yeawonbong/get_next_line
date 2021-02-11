@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/10 16:42:56 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/11 18:33:42 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(const char *str);
+char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(const char *str);
-int		ft_save(char *str, char *read_sofar, char leftover[]);
+int		ft_strlen(char *str);
+int		ft_save(char *str, char *read_sofar, char *leftover[], int fd);
 int		get_next_line(int fd, char **line);
 
 #endif

@@ -41,12 +41,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (1)
 	{
 		if (!s1)
-			break;
+			break ;
 		while (s1[i])
 		{
 			dst[i] = s1[i];
 			i++;
 		}
+		break ;
 	}
 	j = 0;
 	while (s2[j])

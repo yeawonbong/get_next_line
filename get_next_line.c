@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:46:32 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/13 18:55:54 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/14 16:05:19 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,20 @@ int	find_enter(char *str)
 	return (0);
 }
 
-int		ft_save(char *str, char **read_sofar, char **leftover, int fd) //첫번째 '\n' 기준으로 split 하여 저장하는 함수
-{	printf("inside_save");
+int		ft_save(int fd, char *str, char **read_sofar, char **leftover)
+{
+	printf("inside_save!");
 	int		i;
-
+	char	*temp;
 	i = 0;
-	while (str[i])
+	
+	if ((temp = ft_strchr(str, '\n')) != 0)
 	{
-		if (str[i] == '\n')
-		{
-			if (!(leftover[fd] = ft_strdup(&str[i + 1])))
-				return (-1);
-			str[i] = '\0';
-			if (!(*read_sofar = ft_strjoin(*read_sofar, str)))
-				return (-1);
-			return (0);
-		}
-		i++;
+		if (!(leftover[fd] = ft_strdup(temp + 1)))
+			return (-1);
+		*temp = '\0';
+		if (!(*read_sofar = ft_strjoin(*read_sofar, str)))
+			return (-1);
 	}
 	return (0);
 }
@@ -64,7 +61,7 @@ int		get_next_line(int fd, char **line)
 			{printf("findenter=1");
 				if (!(temp = ft_strdup(leftover[fd])))
 					return (-1);
-				if (ft_save(temp, read_sofar, leftover, fd) == -1) //save로 split
+				if (ft_save(fd, temp, read_sofar, leftover) == -1) //save로 split
 					return (-1);
 				line = read_sofar;
 				return (1);
@@ -88,7 +85,7 @@ int		get_next_line(int fd, char **line)
 			{
 				printf("<<<<<YES_enter\n");/////////
 				printf("[buf is : %s]\n", buf);
-				if (ft_save(buf, read_sofar, leftover, fd) == -1)
+				if (ft_save(fd, buf, read_sofar, leftover) == -1)
 					return (-1);
 				printf("out_save");
 

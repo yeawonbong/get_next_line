@@ -23,5 +23,6 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 int		ft_save(char *str, char **read_sofar, char **leftover, int fd);
 int		get_next_line(int fd, char **line);
+char    ft_strndup(const char *src, size_t len);
 
 #endif

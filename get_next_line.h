@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/13 17:40:05 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/14 15:49:17 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
-int		ft_save(char *str, char **read_sofar, char **leftover, int fd);
+char	*ft_strchr(char *str, int c);
+int		ft_save(int fd, char *str, char **read_sofar, char **leftover);
 int		get_next_line(int fd, char **line);
 
 #endif

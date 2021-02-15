@@ -5,16 +5,14 @@ int main(void)
 	char* line=NULL;
 	int fd=0;
 	int gnl;
-	int i;
 
-	i = 0;
-	fd = open("test.txt", O_RDONLY);
+	fd = open("test copy.txt", O_RDONLY);
 	printf("fd = %d\n", fd);
 	while ((gnl = get_next_line(fd, &line)) > 0)
-	{printf("why\n");
+	{
 		printf("line = %s\n", line);
-		i++;
 	}
+	printf("line = %s", line);
 	free(line);
 	return (0);
 }/*

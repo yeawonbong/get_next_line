@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 19:46:32 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/15 16:35:10 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/15 18:10:01 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_save(int fd, char *str, char **read_sofar, char **leftover)
 	int		i;
 	char	*temp;
 	i = 0;
-	
+
 	if ((temp = ft_strchr(str, '\n')) != 0)
 	{
 		if (!(leftover[fd] = ft_strdup(temp + 1)))
@@ -26,8 +26,6 @@ int		ft_save(int fd, char *str, char **read_sofar, char **leftover)
 		if (!(*read_sofar = ft_strjoin(*read_sofar, str)))
 			return (-1);
 	}
-	else
-		leftover[fd] = ft_strdup(str);
 	return (0);
 }
 
@@ -39,6 +37,8 @@ int		get_next_line(int fd, char **line)
 	char		buf[BUFFER_SIZE + 1];
 	int			readbyte;
 
+	if (fd <= 0 || BUFFER_SIZE <= 0 || !(line) || fd >= OPEN_MAX)
+		return (-1);
 	*read_sofar = ft_strdup("");
 	if (leftover[fd])
 	{
@@ -76,7 +76,7 @@ int		get_next_line(int fd, char **line)
 		}
 	} // EOF 있는 마지막 line을 읽은 상태
 	*line = *read_sofar;
-	if (!(leftover[fd] = ft_strdup(buf)))
+	if (readbyte < 0 || !(leftover[fd] = ft_strdup(buf)))
 		return (-1);
 	return (0);
 }

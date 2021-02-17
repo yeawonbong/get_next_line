@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 00:28:35 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/18 01:23:19 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/18 04:58:51 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_strlen(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -45,6 +47,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	printf("JOIN\n");
 	if (!(dst = malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (0);
 	i = 0;

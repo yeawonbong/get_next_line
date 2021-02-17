@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/18 05:29:36 by ybong             #+#    #+#             */
+/*   Updated: 2021/02/18 05:30:15 by ybong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
-int main(void)
+
+int	main(void)
 {
-	char* line=NULL;
-	int fd=0;
-	int gnl;
+	char	*line = NULL;
+	int		fd = 0;
+	int		gnl;
 
 	fd = open("test copy.txt", O_RDONLY);
 	printf("fd = %d\n", fd);
@@ -15,7 +27,8 @@ int main(void)
 	printf("line = %s", line);
 	free(line);
 	return (0);
-}/*
+}
+/*
 int main(void)
 {
 printf("OK\n");

@@ -1,6 +1,4 @@
-WIN?
-pleease pass
-why why
-get next line
-
-End of file.
+hi
+pleease
+haha
+END.

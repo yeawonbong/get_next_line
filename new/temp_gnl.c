@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 21:19:19 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/18 05:44:59 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/20 13:52:15 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_split_str(int enter_idx, char *buf, char *leftover_fd, char **line)
 	leftover_fd = ft_strdup(&buf[enter_idx + 1]);
 	buf[enter_idx] = '\0';
 	*line = ft_strjoin(*line, buf);
-	free(buf);
+	*buf = 0;
 	return (1);
 }
 

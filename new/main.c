@@ -6,11 +6,11 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 05:29:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/18 05:30:15 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/20 16:06:32 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "new_gnl.h"
 
 int	main(void)
 {

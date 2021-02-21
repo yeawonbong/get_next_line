@@ -1,4 +1,4 @@
-hi
-pleease
-haha
-END.
+first
+second
+third
+EOF.

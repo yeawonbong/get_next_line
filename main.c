@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_gnl.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/21 14:14:58 by ybong            ###   ########.fr       */
+/*   Created: 2021/02/18 05:29:36 by ybong             #+#    #+#             */
+/*   Updated: 2021/02/20 17:12:13 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <limits.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
-# endif
+#include "get_next_line.h"
 
-int     ft_strlen(const char *str);
-char	*ft_strdup(const char *str);
-char	*ft_strjoin(char *s1, char *s2);
-int		get_next_line(int fd, char **line);
-#endif
+int	main(void)
+{
+	char	*line = NULL;
+	int		fd = 0;
+	int		gnl;
+
+	fd = open("test copy.txt", O_RDONLY);
+	printf("fd = %d\n", fd);
+	while ((gnl = get_next_line(fd, &line)) > 0)
+	{
+		printf("line = %s\n", line);
+	}
+	printf("line = %s", line);
+	free(line);
+	return (0);
+}
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_gnl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:28:57 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/21 17:59:37 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/22 19:08:38 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 int		ft_read(int readsize, int fd, char *buf, char **backup)
 {printf("ㅡ[READ]ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
-	printf("| my backup input is : %s\n", backup[fd]);
+	printf("| my first backup input is : %s\n", backup[fd]);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) <= 0)
+	{
+		printf("|(IN_READ) ==return -1!\n ");
 		return (-1);
+	}
+	printf("| my backup input_after read is : %s\n", backup[fd]);
 	buf[readsize] = '\0';
-	printf("| my backup input is : %s\n", backup[fd]);
-	printf("| buf is : %s\n", buf);
+	printf("| my buf is : %s\n", buf);
 	backup[fd] = ft_strjoin(backup[fd], buf);
 	printf("| THIS_IS_READ_readsize is : %d\n| THIS_IS_READ_backup is: %s\n", readsize, backup[fd]);
 printf("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ[READ]ㅡ\n\n");
@@ -64,12 +67,12 @@ int		ft_split_str(int fd, char **backup, char **line, int enter_idx)
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*backup[OPEN_MAX];
+	static char	*backup[FOPEN_MAX];
 	char		buf[BUFFER_SIZE + 1];
 	int			readsize;
 	int			enter_idx;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !(line) || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !(line) || fd > FOPEN_MAX)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
@@ -79,9 +82,10 @@ int		get_next_line(int fd, char **line)
 			return (-1);		
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
+		printf("#####(NO_ENTER)\n");
 		printf("#####backup is: %s\n", backup[fd]);
-			printf("#####BUFFER_SIZE: %d, readsize : %d\n", BUFFER_SIZE, readsize);
-			*line = backup[fd];
+		printf("#####BUFFER_SIZE: %d, readsize : %d\n", BUFFER_SIZE, readsize);
+		*line = backup[fd];
 		if (readsize < BUFFER_SIZE)
 		{
 			printf ("#####FIN_line: %s\n", *line);

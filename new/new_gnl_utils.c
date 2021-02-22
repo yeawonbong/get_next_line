@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_gnl_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:26:16 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/21 17:43:31 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/22 18:29:12 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*dst;
 	int		i;
 	int		j;
-printf("| s1 is : %s\n", s1);
-printf("| s2 is : %s\n", s2);
+printf("| (IN_JOIN) s1 is : %s\n", s1);
+printf("| (IN_JOIN) s2 is : %s\n", s2);
 	if (!(dst = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)	+ 1))))
 		return (0);
 	i = 0;

@@ -6,27 +6,32 @@
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:28:57 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/22 19:08:38 by ybong            ###   ########.fr       */
+/*   Updated: 2021/02/28 14:40:24 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_gnl.h"
 
 int		ft_read(int readsize, int fd, char *buf, char **backup)
-{printf("ㅡ[READ]ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
+{
+	char *temp;
+	printf("ㅡ[READ]ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
 	printf("| my first backup input is : %s\n", backup[fd]);
+	printf("| my first buf input is : %s\n", buf);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) <= 0)
 	{
+		printf("|(IN_READ) ==readsize is : %d\n", readsize);
 		printf("|(IN_READ) ==return -1!\n ");
 		return (-1);
 	}
 	printf("| my backup input_after read is : %s\n", backup[fd]);
 	buf[readsize] = '\0';
 	printf("| my buf is : %s\n", buf);
-	backup[fd] = ft_strjoin(backup[fd], buf);
+	temp = ft_strjoin(backup[fd], buf);
+	backup[fd] = ft_strdup(temp);
 	printf("| THIS_IS_READ_readsize is : %d\n| THIS_IS_READ_backup is: %s\n", readsize, backup[fd]);
 printf("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ[READ]ㅡ\n\n");
-	
+	free (buf);
 	return (readsize);
 }
 
@@ -68,7 +73,7 @@ int		ft_split_str(int fd, char **backup, char **line, int enter_idx)
 int		get_next_line(int fd, char **line)
 {
 	static char	*backup[FOPEN_MAX];
-	char		buf[BUFFER_SIZE + 1];
+	char		*buf;
 	int			readsize;
 	int			enter_idx;
 
@@ -76,6 +81,7 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
+	buf = (char *)malloc(BUFFER_SIZE + 1);
 	while ((readsize = ft_read(readsize, fd, buf, backup)) > 0)
 	{printf("--------------------------------------------------start_of_while\n");
 		if (readsize  == -1)
@@ -94,6 +100,7 @@ int		get_next_line(int fd, char **line)
 		}
 		printf("--------------------------------------------------end_of_while\n");
 	}
+	*line = backup[fd];
 	printf("#####return_fin0\n");
 	return(0);
 }

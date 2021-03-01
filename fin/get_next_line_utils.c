@@ -6,7 +6,7 @@
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:26:16 by ybong             #+#    #+#             */
-/*   Updated: 2021/03/01 16:36:52 by ybong            ###   ########.fr       */
+/*   Updated: 2021/03/01 22:38:23 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,17 @@ char	*ft_strdup(const char *str)
 }
 
 char	*ft_strjoin(char *s1, char *s2)
-{//지금 dst랑 s2(buf)랑 가리키는 주소가 같아.
+{
 	char	*dst;
 	int		i;
 	int		j;
 
+	if (!s1 && !s2)
+		return (0);
 	if (!s1)
-		return (ft_strdup(s2));
+		s1 = ft_strdup("");
 	if (!s2)
-		return (s1);
+		s2 = ft_strdup("");
 	if (!(dst = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)	+ 1))))
 		return (0);
 	i = 0;
@@ -60,6 +62,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	free(s1);
+	s1 = 0;
 	j = 0;
 	while (s2[j])
 	{
@@ -68,6 +71,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	dst[i] = '\0';
-	free(s2);
 	return (dst);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_gnl_utils.c                                    :+:      :+:    :+:   */
+/*   NEWutils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:26:16 by ybong             #+#    #+#             */
-/*   Updated: 2021/03/01 14:06:15 by ybong            ###   ########.fr       */
+/*   Updated: 2021/03/01 17:29:07 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,24 @@ char	*ft_strdup(const char *str)
 }
 
 char	*ft_strjoin(char *s1, char *s2)
-{//지금 dst랑 s2(buf)랑 가리키는 주소가 같아.
+{
 	char	*dst;
 	int		i;
 	int		j;
 
-printf("| (IN_JOIN) s1 is : %s\n", s1);
-printf("| (IN_JOIN) s2 is : %s\n", s2);
-	if (!(dst = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)	+ 1))))
-		return (0);
-printf("| ((IN_JOIN)) s2(buf) address is : %p\n| ((IN_JOIN)) dst address is : %p\n",s2, dst);
-	i = 0;
-		printf("| (IN_JOIN) dst is : %s\n| (IN_JOIN) s1 is : %s\n| (IN_JOIN) s2 is : %s\n", dst,s1,s2);
-
 	if (!s1)
 		return (ft_strdup(s2));
+	if (!s2)
+		return (s1);
+	if (!(dst = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)	+ 1))))
+		return (0);
+	i = 0;
 	while (s1[i])
-	{printf("| (IN_JOIN) OK\n");
+	{
 		dst[i] = s1[i];
-		i++;		printf("| (IN_JOIN) s2 is : %s\n", s2);
+		i++;
 	}
-
-	printf("| (IN_JOIN) dst is : %s\n", dst);
-
-	
+	free(s1);
 	j = 0;
 	while (s2[j])
 	{
@@ -74,6 +68,6 @@ printf("| ((IN_JOIN)) s2(buf) address is : %p\n| ((IN_JOIN)) dst address is : %p
 		j++;
 	}
 	dst[i] = '\0';
-	printf("| ==JOINED STRING IS : %s\n", dst);
+
 	return (dst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 05:29:36 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/22 23:04:50 by ybong            ###   ########.fr       */
+/*   Updated: 2021/03/01 15:50:40 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,11 @@ int	main(void)
 	fd = open("test copy.txt", O_RDONLY);
 	while ((gnlreturn = get_next_line(fd, &line)) > 0)
 	{
-		printf("\n\n>>line = %s<<\n\n\n", line);
+		printf(">>line = %s<<\n", line);
 	}
 	if (gnlreturn == 0)
-		printf("\n\n>>line = %s<<\n\n", line);
+		printf(">>line = %s<<\n", line);
 	free(line);
-
-/*
-	while (gnlreturn > 0)
-	{
-		gnlreturn = read(fd, line, BUFFER_SIZE);
-		line[gnlreturn] = 0;		
-		printf("line = %s\n", line);
-		gnlreturn = read(fd, line, BUFFER_SIZE);
-		line[gnlreturn] = 0;
-		printf("line = %s\n", line);
-	}
-*/
+	system("leaks a.out > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
 	return (0);
 }
-

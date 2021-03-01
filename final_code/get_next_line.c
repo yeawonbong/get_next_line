@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_gnl.h"
+#include "get_next_line.h"
 
 int		ft_read(int readsize, int fd, char **backup)
 {
 	char *buf;
-
+ 
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 		return (-1);
 	buf[readsize] = '\0';
 	backup[fd] = ft_strjoin(backup[fd], buf);
-	free(buf);
 	return (readsize);
 }
 
@@ -65,10 +64,7 @@ int		get_next_line(int fd, char **line)
 	while ((readsize = ft_read(readsize, fd, backup)) > 0)
 	{
 		if (readsize  == -1)
-		{
-			free(backup[fd]);
-			return (-1);
-		}
+			return (-1);		
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
 		*line = backup[fd]; //개행 없으면

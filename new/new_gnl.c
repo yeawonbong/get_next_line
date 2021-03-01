@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_gnl.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 15:28:57 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/28 14:40:24 by ybong            ###   ########.fr       */
+/*   Updated: 2021/03/01 15:18:18 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int		ft_read(int readsize, int fd, char *buf, char **backup)
 {
+	buf = (char *)malloc(BUFFER_SIZE + 1);
+
 	char *temp;
 	printf("ㅡ[READ]ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ\n");
 	printf("| my first backup input is : %s\n", backup[fd]);
 	printf("| my first buf input is : %s\n", buf);
-	if ((readsize = read(fd, buf, BUFFER_SIZE)) <= 0)
+	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 	{
 		printf("|(IN_READ) ==readsize is : %d\n", readsize);
 		printf("|(IN_READ) ==return -1!\n ");
@@ -81,7 +83,6 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
-	buf = (char *)malloc(BUFFER_SIZE + 1);
 	while ((readsize = ft_read(readsize, fd, buf, backup)) > 0)
 	{printf("--------------------------------------------------start_of_while\n");
 		if (readsize  == -1)

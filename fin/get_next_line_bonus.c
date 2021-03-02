@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_gnl.c                                          :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/20 15:28:57 by ybong             #+#    #+#             */
-/*   Updated: 2021/02/28 14:40:24 by ybong            ###   ########.fr       */
+/*   Created: 2021/03/02 14:32:10 by ybong             #+#    #+#             */
+/*   Updated: 2021/03/02 14:32:10 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int		ft_read(int readsize, int fd, char **backup)
 {
@@ -20,7 +20,7 @@ int		ft_read(int readsize, int fd, char **backup)
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 		return (-1);
 	if (buf)
-		buf[readsize] = '\0';///////////
+		buf[readsize] = '\0';
 	backup[fd] = ft_strjoin(backup[fd], buf);
 	free(buf);
 	return (readsize);
@@ -31,6 +31,8 @@ int		ft_find_enter(char *str)
 	int i;
 
 	i = 0;
+	if (str == 0)
+		return (-42);
 	while (str[i])
 	{
 		if (str[i] == '\n')
@@ -59,7 +61,7 @@ int		get_next_line(int fd, char **line)
 	int			readsize;
 	int			enter_idx;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !(line) || fd > FOPEN_MAX)
+	if (BUFFER_SIZE <= 0 || fd < 0 || !(line) || fd > FOPEN_MAX)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
@@ -67,12 +69,13 @@ int		get_next_line(int fd, char **line)
 	{	
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
-		if (backup[fd] && (readsize < BUFFER_SIZE))
+		if (enter_idx == -1 && (readsize < BUFFER_SIZE))
 		{
 			*line = backup[fd];
+			backup[fd] = 0;
 			return (0);
 		}
-		if (readsize == 0 && backup[fd] == NULL)
+		if (readsize == 0 && backup[fd] == 0)
 		{
 			*line = ft_strdup("");
 			return (0);

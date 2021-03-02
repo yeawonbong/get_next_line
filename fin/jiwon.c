@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "new_gnl.h"
+#include "get_next_line.h"
 
 int		ft_read(int readsize, int fd, char **backup)
 {
@@ -19,7 +19,8 @@ int		ft_read(int readsize, int fd, char **backup)
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 		return (-1);
-	buf[readsize] = '\0';
+	if (buf)
+		buf[readsize] = '\0';
 	backup[fd] = ft_strjoin(backup[fd], buf);
 	free(buf);
 	return (readsize);
@@ -30,6 +31,8 @@ int		ft_find_enter(char *str)
 	int i;
 
 	i = 0;
+	if (str == 0)
+		return (-42);
 	while (str[i])
 	{
 		if (str[i] == '\n')
@@ -62,19 +65,23 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
-	while ((readsize = ft_read(readsize, fd, backup)) > 0)
+	while ((readsize = ft_read(readsize, fd, backup)) >= 0)
 	{
-		if (readsize  == -1)
-		{
-			free(backup[fd]);
-			return (-1);
-		}
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
-		*line = backup[fd]; //개행 없으면
-		if (readsize < BUFFER_SIZE)
+		if (enter_idx == -1 && (readsize < BUFFER_SIZE))
+		{
+			*line = backup[fd];
+			backup[fd] = 0;
 			return (0);
+		}
+		if (readsize == 0 && backup[fd] == 0)
+		{
+			*line = ft_strdup("");
+			return (0);
+		}
 	}
-	*line = backup[fd];
+	if (readsize  == -1)
+		return (-1);
 	return(0);
 }

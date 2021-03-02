@@ -15,7 +15,7 @@
 int		ft_read(int readsize, int fd, char **backup)
 {
 	char *buf;
-
+	
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 		return (-1);
@@ -61,12 +61,12 @@ int		get_next_line(int fd, char **line)
 	int			readsize;
 	int			enter_idx;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !(line) || fd > FOPEN_MAX)
+	if (BUFFER_SIZE <= 0 || fd < 0 || !(line) || fd > FOPEN_MAX)
 		return (-1);
 	enter_idx = 0;
 	readsize = 0;
 	while ((readsize = ft_read(readsize, fd, backup)) >= 0)
-	{
+	{	
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
 		if (enter_idx == -1 && (readsize < BUFFER_SIZE))

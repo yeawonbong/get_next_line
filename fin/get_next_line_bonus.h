@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 14:32:19 by ybong             #+#    #+#             */
-/*   Updated: 2021/03/02 14:32:31 by ybong            ###   ########.fr       */
+/*   Created: 2021/01/31 19:48:36 by ybong             #+#    #+#             */
+/*   Updated: 2021/03/03 15:14:39 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 3
 # endif
 
-int     ft_strlen(const char *str);
+int		ft_strlen(const char *str);
 char	*ft_strdup(const char *str);
 char	*ft_strjoin(char *s1, char *s2);
 int		get_next_line(int fd, char **line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybong <ybong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ybong <ybong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 14:32:10 by ybong             #+#    #+#             */
-/*   Updated: 2021/03/02 14:32:10 by ybong            ###   ########.fr       */
+/*   Created: 2021/02/20 15:28:57 by ybong             #+#    #+#             */
+/*   Updated: 2021/03/03 15:14:47 by ybong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_read(int readsize, int fd, char **backup)
 {
 	char *buf;
-	
+
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if ((readsize = read(fd, buf, BUFFER_SIZE)) < 0)
 		return (-1);
@@ -66,7 +66,7 @@ int		get_next_line(int fd, char **line)
 	enter_idx = 0;
 	readsize = 0;
 	while ((readsize = ft_read(readsize, fd, backup)) >= 0)
-	{	
+	{
 		if ((enter_idx = ft_find_enter(backup[fd])) >= 0)
 			return ((ft_split_str(fd, backup, line, enter_idx)));
 		if (enter_idx == -1 && (readsize < BUFFER_SIZE))
@@ -81,7 +81,5 @@ int		get_next_line(int fd, char **line)
 			return (0);
 		}
 	}
-	if (readsize  == -1)
-		return (-1);
-	return(0);
+	return (-1);
 }

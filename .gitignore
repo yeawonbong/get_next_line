@@ -1,2 +1,4 @@
-GNL_lover/
-gnl-war-machine-v2019/
+GNL_lover
+gnl-war-machine-v2019
+*.o
+*.a
